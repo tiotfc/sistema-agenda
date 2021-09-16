@@ -42,6 +42,14 @@ public class Contato {
 		this.listaEnderecos = listaEnderecos;
 		this.listaEmails = listaEmails;
 	}
+	
+	public Contato() {
+	}
+
+	
+	public Integer getId() {
+		return id;
+	}
 
 	public String getNome() {
 		return nome;
@@ -58,7 +66,19 @@ public class Contato {
 	public String getApelido() {
 		return apelido;
 	}
-	
+
+	public List<Telefone> getListaTelefones() {
+		return listaTelefones;
+	}
+
+	public List<Endereco> getListaEnderecos() {
+		return listaEnderecos;
+	}
+
+	public List<Email> getListaEmails() {
+		return listaEmails;
+	}
+
 	public void adicionaEndereco(Endereco endereco) {
 		endereco.setContato(this);
 		listaEnderecos.add(endereco);

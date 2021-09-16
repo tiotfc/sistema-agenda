@@ -1,10 +1,13 @@
 package br.com.sada.sistema.agenda.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.sada.sistema.agenda.model.enums.TipoTelefone;
 
@@ -19,7 +22,8 @@ public class Telefone {
 	private long ddd;
 	private long telefone;
 
-	@ManyToOne
+	@JsonIgnore
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Contato contato;
 
 	public Telefone(TipoTelefone tipoTelefone, long ddi, long ddd, long telefone) {
@@ -30,6 +34,9 @@ public class Telefone {
 		this.telefone = telefone;
 	}
 
+	public Telefone() {
+	}
+	
 	public int getId() {
 		return id;
 	}

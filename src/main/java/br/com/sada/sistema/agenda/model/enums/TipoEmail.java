@@ -2,7 +2,7 @@ package br.com.sada.sistema.agenda.model.enums;
 
 public enum TipoEmail {
 	
-	RESIDENCIAL(1),
+	PESSOAL(1),
 	COMERCIAL(2);
 
 	private int tipoEmail;

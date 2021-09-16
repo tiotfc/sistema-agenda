@@ -42,27 +42,31 @@ public class ContatoDto {
 	}
 	
 	public Contato toContato() {
-//		Endereco endereco = new Endereco(0, null, apelido, 0, sobreNome, null, nome, apelido);
-//		Telefone telefone = new Telefone(null, 0, 0, 0);
-//		Email email = new Email(0, null, apelido);
 		
 		List<Endereco> listaEnderecos = new ArrayList<>();
-		List<Telefone> listaTelefone = new ArrayList<>();
-		List<Email> listaEmail = new ArrayList<>();
+		List<Telefone> listaTelefones = new ArrayList<>();
+		List<Email> listaEmails = new ArrayList<>();
+		Contato contato = new Contato(this.nome, this.sobreNome, this.dataNascimento, this.apelido, listaTelefones, listaEnderecos, listaEmails);
 		
-		listaEnderecos.stream().forEach(item -> {
-			listaEnderecos.add(new Endereco(item.getTipoEndereco(), item.getRua(), item.getNumero(), item.getBairro(), item.getEstado(), item.getPais(), item.getCep()));
+		this.listaEnderecos.stream().forEach(item -> {
+			Endereco endereco = new Endereco(item.getTipoEndereco(), item.getRua(), item.getNumero(), item.getBairro(), item.getEstado(), item.getPais(), item.getCep());
+			endereco.setContato(contato);
+			listaEnderecos.add(endereco);
 		});
 		
-		listaTelefone.stream().forEach(item -> {
-			listaTelefone.add(new Telefone(item.getTipoTelefone(), item.getDdi(), item.getDdd(), item.getTelefone()));
+		this.listaTelefones.stream().forEach(item -> {
+			Telefone telefone = new Telefone(item.getTipoTelefone(), item.getDdi(), item.getDdd(), item.getTelefone());
+			telefone.setContato(contato);
+			listaTelefones.add(telefone);
 		});
 		
-		listaEmail.stream().forEach(item -> {
-			listaEmail.add(new Email(item.getTipoEmail(), item.getEmail()));
+		this.listaEmails.stream().forEach(item -> {
+			Email email = new Email(item.getTipoEmail(), item.getEmail());
+			email.setContato(contato);
+			listaEmails.add(email);
 		});
 		
-		return new Contato(this.nome, this.sobreNome, this.dataNascimento, this.apelido, listaTelefone, listaEnderecos, listaEmail);
+		return contato;
 	}
 	
 }

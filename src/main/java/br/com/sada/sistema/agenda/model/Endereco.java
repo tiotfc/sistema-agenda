@@ -1,10 +1,13 @@
 package br.com.sada.sistema.agenda.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.sada.sistema.agenda.model.enums.Estados;
 import br.com.sada.sistema.agenda.model.enums.TipoEndereco;
@@ -23,7 +26,8 @@ public class Endereco {
 	private String pais;
 	private String cep;
 	
-	@ManyToOne
+	@JsonIgnore
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Contato contato;
 
 	public Endereco(TipoEndereco tipoEndereco, String rua, int numero, String bairro, Estados estado,
@@ -38,6 +42,9 @@ public class Endereco {
 		this.cep = cep;
 	}
 
+	public Endereco() {
+	}
+	
 	public int getId() {
 		return id;
 	}

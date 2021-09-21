@@ -1,5 +1,7 @@
 package br.com.sada.sistema.agenda.model;
 
+import java.util.Objects;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -84,6 +86,24 @@ public class Endereco {
 	public void setContato(Contato contato) {
 		this.contato = contato;
 	}
-	
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(cep, contato, numero, rua);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Endereco other = (Endereco) obj;
+		return Objects.equals(cep, other.cep) && Objects.equals(contato, other.contato) && numero == other.numero
+				&& Objects.equals(rua, other.rua);
+	}
+
 	
 }

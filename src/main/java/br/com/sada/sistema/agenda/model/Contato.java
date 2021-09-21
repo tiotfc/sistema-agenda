@@ -3,6 +3,7 @@ package br.com.sada.sistema.agenda.model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -95,4 +96,24 @@ public class Contato {
 		listaEmails.add(email);
 	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(dataNascimento, nome, sobreNome);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Contato other = (Contato) obj;
+		return Objects.equals(dataNascimento, other.dataNascimento) && Objects.equals(nome, other.nome)
+				&& Objects.equals(sobreNome, other.sobreNome);
+	}
+
+	
+	
 }

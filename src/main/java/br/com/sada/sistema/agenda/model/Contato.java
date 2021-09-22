@@ -10,7 +10,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Contato {
@@ -31,6 +34,10 @@ public class Contato {
 
 	@OneToMany(mappedBy = "contato", cascade = CascadeType.ALL)
 	private List<Email> listaEmails = new ArrayList<>();
+	
+	@JsonIgnore
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Usuario usuario;
 
 	public Contato(String nome, String sobreNome, LocalDate dataNascimento, String apelido,
 			List<Telefone> listaTelefones, List<Endereco> listaEnderecos, List<Email> listaEmails) {
@@ -78,6 +85,14 @@ public class Contato {
 
 	public List<Email> getListaEmails() {
 		return listaEmails;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	public void adicionaEndereco(Endereco endereco) {

@@ -35,12 +35,14 @@ public class ContatoController {
 	@GetMapping("/{usuarioId}/{id}")
 	public Contato buscarPorId(@PathVariable int usuarioId, @PathVariable int id) {
 		return contatoService.findById(id);
+//		return contatoService.listContatoByUser(id, usuarioId);
 	}
 	
 	@PreAuthorize("#usuarioId==authentication.principal.id")
 	@GetMapping("/lista/{usuarioId}")
 	public List<Contato> listarContatos(@PathVariable int usuarioId) {
-		return contatoService.findAll();
+//		return contatoService.findAll();
+		return contatoService.listContatoByUser(usuarioId);
 	}
 	
 }

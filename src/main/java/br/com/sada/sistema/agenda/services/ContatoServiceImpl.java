@@ -3,6 +3,8 @@ package br.com.sada.sistema.agenda.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.stereotype.Service;
 
 import br.com.sada.sistema.agenda.model.Contato;
@@ -35,6 +37,9 @@ public class ContatoServiceImpl {
 
 	public Contato findById(int id) {
 		return contatoRepository.findById(id).get();
+	}
+	public List<Contato> listContatoByUser(int usuarioId) {
+		return contatoRepository.findAllByUsuarioId(usuarioId);
 	}
 	
 	

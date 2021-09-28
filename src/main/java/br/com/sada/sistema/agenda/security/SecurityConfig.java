@@ -2,6 +2,7 @@ package br.com.sada.sistema.agenda.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -39,6 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.httpBasic().and().csrf().disable()
 		.authorizeRequests().antMatchers("/h2-console/**").permitAll()
+		.antMatchers("/v2/api-docs","/swagger-ui/**","/swagger-resources/**","/swagger-ui.html**","/webjars/**","favicon.ico").permitAll()
 		.antMatchers("/auth/**").permitAll()
 		.antMatchers("/email/**").permitAll()
 		.anyRequest().authenticated()

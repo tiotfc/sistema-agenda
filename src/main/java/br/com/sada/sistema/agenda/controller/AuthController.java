@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.sada.sistema.agenda.model.dto.FormLogin;
 import br.com.sada.sistema.agenda.model.dto.TokenDto;
 import br.com.sada.sistema.agenda.security.TokenService;
+import io.swagger.annotations.Api;
 
 @RestController
 @RequestMapping("auth")
+@Api(tags = "Autenticação")
 public class AuthController {
 
 	@Autowired

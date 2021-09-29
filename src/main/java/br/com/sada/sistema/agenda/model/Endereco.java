@@ -104,6 +104,5 @@ public class Endereco {
 		return Objects.equals(cep, other.cep) && Objects.equals(contato, other.contato) && numero == other.numero
 				&& Objects.equals(rua, other.rua);
 	}
-
 	
 }

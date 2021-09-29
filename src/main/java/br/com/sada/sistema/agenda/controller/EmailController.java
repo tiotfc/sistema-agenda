@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.sada.sistema.agenda.model.dto.EmailInput;
 import br.com.sada.sistema.agenda.services.EmailService;
+import io.swagger.annotations.Api;
 
 @RestController
+@Api(tags = "Email")
 public class EmailController {
 
 	@Autowired

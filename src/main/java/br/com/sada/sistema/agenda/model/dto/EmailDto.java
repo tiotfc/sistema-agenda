@@ -1,5 +1,6 @@
 package br.com.sada.sistema.agenda.model.dto;
 
+import br.com.sada.sistema.agenda.model.Email;
 import br.com.sada.sistema.agenda.model.enums.TipoEmail;
 
 public class EmailDto {
@@ -12,6 +13,10 @@ public class EmailDto {
 
 	public String getEmail() {
 		return email;
+	}
+	
+	public Email toEmail() {
+		return new Email(tipoEmail, email);
 	}
 
 }

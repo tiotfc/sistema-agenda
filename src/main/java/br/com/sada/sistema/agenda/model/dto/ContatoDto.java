@@ -2,6 +2,12 @@ package br.com.sada.sistema.agenda.model.dto;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import br.com.sada.sistema.agenda.model.Contato;
+import br.com.sada.sistema.agenda.model.Email;
+import br.com.sada.sistema.agenda.model.Endereco;
+import br.com.sada.sistema.agenda.model.Telefone;
 
 public class ContatoDto {
 
@@ -39,6 +45,15 @@ public class ContatoDto {
 	}
 	public List<EmailDto> getListaEmails() {
 		return listaEmails;
+	}
+	
+	public Contato toContato() {
+//		List<Endereco> listaEndereco = this.listaEnderecos.stream().map(e->e.toEndereco()).collect(Collectors.toList());
+		List<Endereco> listaEnderecos = this.listaEnderecos.stream().map(EnderecoDto::toEndereco).collect(Collectors.toList());
+		List<Telefone> listaTelefones = this.listaTelefones.stream().map(TelefoneDto::toTelefone).collect(Collectors.toList());
+		List<Email> listaEmails = this.listaEmails.stream().map(EmailDto::toEmail).collect(Collectors.toList());
+		
+		return new Contato(nome, sobreNome, dataNascimento, apelido, listaTelefones, listaEnderecos, listaEmails);
 	}
 
 }

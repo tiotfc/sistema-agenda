@@ -1,5 +1,6 @@
 package br.com.sada.sistema.agenda.model.dto;
 
+import br.com.sada.sistema.agenda.model.Endereco;
 import br.com.sada.sistema.agenda.model.enums.Estados;
 import br.com.sada.sistema.agenda.model.enums.TipoEndereco;
 
@@ -41,4 +42,8 @@ public class EnderecoDto {
 		return cep;
 	}
 
+	public Endereco toEndereco() {
+		return new Endereco(tipoEndereco, rua, numero, bairro, estado, pais, cep);
+	}
+	
 }

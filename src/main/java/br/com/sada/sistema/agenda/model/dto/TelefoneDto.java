@@ -1,5 +1,6 @@
 package br.com.sada.sistema.agenda.model.dto;
 
+import br.com.sada.sistema.agenda.model.Telefone;
 import br.com.sada.sistema.agenda.model.enums.TipoTelefone;
 
 public class TelefoneDto {
@@ -25,4 +26,8 @@ public class TelefoneDto {
 		return telefone;
 	}
 
+	
+	public Telefone toTelefone() {
+		return new Telefone(tipoTelefone, ddi, ddd, telefone);
+	}
 }

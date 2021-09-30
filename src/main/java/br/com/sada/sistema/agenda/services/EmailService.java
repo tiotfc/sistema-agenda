@@ -15,7 +15,7 @@ public class EmailService {
 	
 	public void enviaEmail(EmailInput email) {
 		SimpleMailMessage mailMessage = new SimpleMailMessage();
-		mailMessage.setFrom("henrique.tio@gmail.com");
+		mailMessage.setFrom("");
 		mailMessage.setSubject(email.getAssunto());
 		mailMessage.setText(email.getCorpo());
 		mailMessage.setTo(email.getPara());

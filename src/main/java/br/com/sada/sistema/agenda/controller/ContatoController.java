@@ -38,7 +38,6 @@ public class ContatoController {
 	}
 	
 	@ApiOperation(value = "Metodo para buscar um contato pelo id, de acordo com o usuario logado.")
-	@PreAuthorize("hasAuthority('ROLE_USUARIO')")
 	@PostAuthorize("#usuarioId==authentication.principal.id")
 	@GetMapping("/{usuarioId}/{contatoId}")
 	public Contato buscarPorId(@PathVariable int usuarioId, @PathVariable int contatoId) {
@@ -58,6 +57,5 @@ public class ContatoController {
 	public void deletarContato(@PathVariable int usuarioId, @PathVariable int contatoId) {
 		contatoService.deleteById(contatoId);
 	}
-	
-	
+
 }

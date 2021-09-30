@@ -53,7 +53,13 @@ public class ContatoDto {
 		List<Telefone> listaTelefones = this.listaTelefones.stream().map(TelefoneDto::toTelefone).collect(Collectors.toList());
 		List<Email> listaEmails = this.listaEmails.stream().map(EmailDto::toEmail).collect(Collectors.toList());
 		
-		return new Contato(nome, sobreNome, dataNascimento, apelido, listaTelefones, listaEnderecos, listaEmails);
+		Contato contato = new Contato(nome, sobreNome, dataNascimento, apelido, listaTelefones, listaEnderecos, listaEmails);
+		
+		listaEnderecos.stream().forEach(e -> e.associaContato(contato));
+		listaTelefones.stream().forEach(t -> t.associaContato(contato));
+		listaEmails.stream().forEach(em -> em.associaContato(contato));
+		
+		return contato;
 	}
 
 }

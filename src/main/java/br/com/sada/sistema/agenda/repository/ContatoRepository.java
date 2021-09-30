@@ -11,6 +11,9 @@ public interface ContatoRepository extends JpaRepository<Contato, Integer> {
 
 	@Query(value = "SELECT c, u FROM Contato c, Usuario u WHERE c.usuario = u.id and u.id = :usuarioId")
 	List<Contato> findAllByUsuarioId(int usuarioId);
+
+	@Query(value = "SELECT c, u FROM Contato c, Usuario u WHERE c.usuario = u.id and u.id = :usuarioId and c.id = :contatoid")
+	Contato findContatoByUsuarioId(int usuarioId, int contatoid);
 	
 	
 }

@@ -84,5 +84,9 @@ public class Telefone {
 		return Objects.equals(contato, other.contato) && ddd == other.ddd && ddi == other.ddi
 				&& telefone == other.telefone;
 	}
+	
+	public void associaContato(Contato contato) {
+		this.contato = contato;
+	}
 
 }

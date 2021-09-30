@@ -71,5 +71,9 @@ public class Email {
 		Email other = (Email) obj;
 		return Objects.equals(contato, other.contato) && Objects.equals(email, other.email);
 	}
+	
+	public void associaContato(Contato contato) {
+		this.contato = contato;
+	}
 
 }

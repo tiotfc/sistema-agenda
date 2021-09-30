@@ -105,4 +105,8 @@ public class Endereco {
 				&& Objects.equals(rua, other.rua);
 	}
 	
+	public void associaContato(Contato contato) {
+		this.contato = contato;
+	}
+	
 }

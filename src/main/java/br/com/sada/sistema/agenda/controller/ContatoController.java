@@ -32,7 +32,6 @@ public class ContatoController {
 	
 	@ApiOperation(value = "Metodo para salvar novos contatos.")
 	@PreAuthorize("#contatoDto.usuarioId==authentication.principal.id")
-	@PostMapping()
 	public Contato salvar(@RequestBody ContatoDto contatoDto) {
 		return contatoService.save(contatoDto);
 	}

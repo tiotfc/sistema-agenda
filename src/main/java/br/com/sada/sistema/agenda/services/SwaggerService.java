@@ -28,8 +28,10 @@ public class SwaggerService {
 				.securitySchemes(Arrays.asList(new ApiKey("Bearer", HttpHeaders.AUTHORIZATION, In.HEADER.name())))
 				.securityContexts(Arrays.asList(securityContext()))
 				.select()
-				.apis(RequestHandlerSelectors.any())
-				.paths(PathSelectors.any()).build().apiInfo(apiInfo());
+				.apis(RequestHandlerSelectors.basePackage("br.com.sada.sistema.agenda.controller"))
+				.paths(PathSelectors.any())
+				.build()
+				.apiInfo(apiInfo());
 	}
 
 	private ApiInfo apiInfo() {

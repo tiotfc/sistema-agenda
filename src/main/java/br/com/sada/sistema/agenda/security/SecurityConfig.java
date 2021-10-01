@@ -2,11 +2,11 @@ package br.com.sada.sistema.agenda.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.httpBasic().and().csrf().disable()
 		.authorizeRequests().antMatchers("/h2-console/**").permitAll()
-		.antMatchers("/v2/api-docs","/swagger-ui/**","/swagger-resources/**","/swagger-ui.html**","/webjars/**","favicon.ico").permitAll()
+//		.antMatchers("/v2/api-docs","/swagger-ui/**","/swagger-resources/**","/swagger-ui.html**","/webjars/**","favicon.ico").permitAll()
 		.antMatchers("/auth/**").permitAll()
 		.antMatchers("/email/**").permitAll()
 		.anyRequest().authenticated()
@@ -49,6 +49,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.and().addFilterBefore(new JwtTokenFilter(tokenService, usuarioService), UsernamePasswordAuthenticationFilter.class);
 	}
 
+	 @Override
+	  public void configure(WebSecurity web) throws Exception {
+	    web.ignoring()
+	      .antMatchers(
+	        "/v2/api-docs",
+	        "/swagger-resources/**",
+	        "/swagger-ui/**",
+	        "/webjars/**");
+	  }
+	
 	@Bean
 	protected BCryptPasswordEncoder encoder() {
 		return new BCryptPasswordEncoder();

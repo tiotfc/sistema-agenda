@@ -2,6 +2,7 @@ package br.com.sada.sistema.agenda.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -76,15 +77,15 @@ public class Contato {
 	}
 
 	public List<Telefone> getListaTelefones() {
-		return listaTelefones;
+		return Collections.unmodifiableList(listaTelefones);
 	}
 
 	public List<Endereco> getListaEnderecos() {
-		return listaEnderecos;
+		return Collections.unmodifiableList(listaEnderecos);
 	}
 
 	public List<Email> getListaEmails() {
-		return listaEmails;
+		return Collections.unmodifiableList(listaEmails);
 	}
 
 	public Usuario getUsuario() {
@@ -128,6 +129,37 @@ public class Contato {
 		return Objects.equals(dataNascimento, other.dataNascimento) && Objects.equals(nome, other.nome)
 				&& Objects.equals(sobreNome, other.sobreNome);
 	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public void setSobreNome(String sobreNome) {
+		this.sobreNome = sobreNome;
+	}
+
+	public void setDataNascimento(LocalDate dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+
+	public void setApelido(String apelido) {
+		this.apelido = apelido;
+	}
+
+	public void setListaTelefones(List<Telefone> listaTelefones) {
+		this.listaTelefones = listaTelefones;
+	}
+
+	public void setListaEnderecos(List<Endereco> listaEnderecos) {
+		this.listaEnderecos = listaEnderecos;
+	}
+
+	public void setListaEmails(List<Email> listaEmails) {
+		this.listaEmails = listaEmails;
+	}
+	
+	
+	
 
 	
 	

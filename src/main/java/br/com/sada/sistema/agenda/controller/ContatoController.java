@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.sada.sistema.agenda.model.Contato;
 import br.com.sada.sistema.agenda.model.dto.ContatoDto;
+import br.com.sada.sistema.agenda.model.dto.ContatoUpdateDto;
 import br.com.sada.sistema.agenda.services.ContatoServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -32,12 +33,13 @@ public class ContatoController {
 	
 	@ApiOperation(value = "Metodo para salvar novos contatos.")
 	@PreAuthorize("#contatoDto.usuarioId==authentication.principal.id")
+	@PostMapping()
 	public Contato salvar(@RequestBody ContatoDto contatoDto) {
 		return contatoService.save(contatoDto);
 	}
 	
 	@ApiOperation(value = "Metodo para buscar um contato pelo id, de acordo com o usuario logado.")
-	@PostAuthorize("#usuarioId==authentication.principal.id")
+	@PreAuthorize("#usuarioId==authentication.principal.id")
 	@GetMapping("/{usuarioId}/{contatoId}")
 	public Contato buscarPorId(@PathVariable int usuarioId, @PathVariable int contatoId) {
 		return contatoService.findContatoByUsuario(usuarioId, contatoId);
@@ -57,4 +59,21 @@ public class ContatoController {
 		contatoService.deleteById(contatoId);
 	}
 
+	@ApiOperation(value = "Metodo para atualizar um contato pelo id, de acordo com o usuario logado.")
+	@PostAuthorize("#atualizaContato.usuarioId==authentication.principal.id")
+	@PostMapping("/atualizar")
+	public Contato atualizarContato(@RequestBody ContatoUpdateDto atualizaContato) {
+		Contato contato = contatoService.findContatoByUsuario(atualizaContato.getUsuarioId(), atualizaContato.getContatoId());
+		Contato contatoUpdate = atualizaContato.getContato().toContato();
+		contato.setApelido(contatoUpdate.getApelido());
+		contato.setDataNascimento(contatoUpdate.getDataNascimento());
+		contato.setNome(contatoUpdate.getNome());
+		contato.setSobreNome(contatoUpdate.getSobreNome());
+		contato.setListaEmails(contatoUpdate.getListaEmails());
+		contato.setListaEnderecos(contatoUpdate.getListaEnderecos());
+		contato.setListaTelefones(contatoUpdate.getListaTelefones());
+		return contatoService.save(contato);
+		
+	}
+	
 }

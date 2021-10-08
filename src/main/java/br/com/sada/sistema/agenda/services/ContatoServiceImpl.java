@@ -26,6 +26,10 @@ public class ContatoServiceImpl {
 		contato.setUsuario(usuarioSerive.buscarPorId(contatoDto.getUsuarioId()));
 		return contatoRepository.save(contato);
 	}
+	
+	public Contato save(Contato contato) {
+		return contatoRepository.save(contato);
+	}
 
 	public List<Contato> findAll() {
 		return contatoRepository.findAll();

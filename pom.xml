@@ -74,7 +74,7 @@
 		<!-- <artifactId>flyway-core</artifactId> -->
 		<!-- </dependency> -->
 		<!-- <dependency> -->
-<!-- <groupId>org.springframework.boot</groupId> -->
+		<!-- <groupId>org.springframework.boot</groupId> -->
 		<!-- <artifactId>spring-boot-starter-web</artifactId> -->
 		<!-- </dependency> -->
 		<dependency>
@@ -84,6 +84,21 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.kafka</groupId>
+			<artifactId>spring-kafka</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.kafka</groupId>
+			<artifactId>spring-kafka-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>br.com.sada.sistema.auditoria</groupId>
+			<artifactId>sistema-auditoria</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 

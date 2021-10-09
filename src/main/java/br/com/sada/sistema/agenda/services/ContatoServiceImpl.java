@@ -7,23 +7,27 @@ import org.springframework.stereotype.Service;
 import br.com.sada.sistema.agenda.model.Contato;
 import br.com.sada.sistema.agenda.model.dto.ContatoDto;
 import br.com.sada.sistema.agenda.repository.ContatoRepository;
+import br.com.sada.sistema.agenda.services.kafka.KafkaProducerService;
+import br.com.sada.sistema.auditoria.model.dto.LogAuditoriaDto;
 
 @Service
 public class ContatoServiceImpl {
 
 	private ContatoRepository contatoRepository;
 	private UsuarioServiceImpl usuarioSerive;
+	private KafkaProducerService kafkaProducerService;
 
-
-	public ContatoServiceImpl(ContatoRepository contatoRepository, UsuarioServiceImpl usuarioSerive) {
-		super();
+	public ContatoServiceImpl(ContatoRepository contatoRepository, UsuarioServiceImpl usuarioSerive,
+			KafkaProducerService kafkaProducerService) {
 		this.contatoRepository = contatoRepository;
 		this.usuarioSerive = usuarioSerive;
+		this.kafkaProducerService = kafkaProducerService;
 	}
 
 	public Contato save(ContatoDto contatoDto) {
 		Contato contato = contatoDto.toContato();
 		contato.setUsuario(usuarioSerive.buscarPorId(contatoDto.getUsuarioId()));
+		kafkaProducerService.enviaLogAuditoria(new LogAuditoriaDto("Auditoria - ContatoServiceImpl - save", contato.getUsuario().getId()));
 		return contatoRepository.save(contato);
 	}
 	
@@ -40,6 +44,7 @@ public class ContatoServiceImpl {
 	}
 	
 	public List<Contato> listContatosByUsuario(int usuarioId) {
+		kafkaProducerService.enviaLogAuditoria(new LogAuditoriaDto("Auditoria - ContatoServiceImpl - listContatosByUsuario", usuarioId));
 		return contatoRepository.findAllByUsuarioId(usuarioId);
 	}
 	
@@ -48,6 +53,7 @@ public class ContatoServiceImpl {
 	}
 
 	public Contato findContatoByUsuario(int usuarioId, int contatoId) {
+		kafkaProducerService.enviaLogAuditoria(new LogAuditoriaDto("Auditoria - ContatoServiceImpl - findContatoByUsuario", usuarioId));
 		return contatoRepository.findContatoByUsuarioId(usuarioId, contatoId);
 	}
 
